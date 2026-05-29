@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/one_room_internal_case_assessment_v1_gpt.html"
+    }
+  ]
+}
