@@ -1,16 +1,6 @@
-# One Room 文慶大腦 V2
+# One Room 文慶大腦 VIP 完整最終版
 
-這是 One Room 內部 AI 案件分析系統。
+npm install
+npm start
 
-流程：
-客人 -> 員工填寫 -> AI分析 -> 文慶GPT複核
-
-核心：
-- 先認同
-- 講現實
-- 幫客人刪預算
-- 給生活畫面
-- 帶設計圖
-
-不是工程報價機器。
-是「文慶思維助手」。
+http://localhost:3000
