@@ -33,7 +33,7 @@ document.getElementById("photos").addEventListener("change",async function(){
 
 function buildReport(){
  const d=getFormDataObject();
- latestReport=`【One Room V4.2 內部案件報表｜強制 GPT Vision 版】
+ latestReport=`【One Room V5 內部案件報表｜決策樹強化版】
 
 一、案件基本資料
 案件編號：${d.caseId||""}
@@ -42,6 +42,7 @@ function buildReport(){
 來源管道：${d.leadSource||""}
 地區：${d.region||""} ${d.district||""}
 樓層／電梯：${d.floorNumber||""}樓／${d.elevator||""}
+確切預算：${d.budgetExact||"未填"}
 預算區間：${d.budgetBand||""}
 急迫程度：${d.urgency||""}
 
@@ -49,7 +50,6 @@ function buildReport(){
 空間類型：${d.spaceType||""}
 坪數區間：${d.sizeBand||""}
 屋況：${d.houseCondition||""}
-停車／搬運距離：${d.walkingDistance||""}
 大樓限制：${d.buildingRules||""}
 
 三、客戶需求
@@ -71,21 +71,23 @@ function buildReport(){
 五、照片清單
 ${(d.photoNames||[]).map((n,i)=>`${i+1}. ${n}`).join("\n")||"尚未上傳照片"}
 
-請 GPT Vision 看照片後，依 One Room 文慶邏輯回覆：
+請 GPT Vision 看照片後，先做預算閘門與接案策略判斷，再回覆：
 A. 案件等級判斷
-B. 概估區間
+B. 內部保守概估區間
 C. 照片看到的問題
-D. 最影響預算的三項
-E. 需人工複核風險
-F. 建議回客話術
-G. 內部員工提醒
+D. 最吃預算的三項
+E. 需人工複核的地方
+F. 建議承接策略：可接 / 可談但需複核 / 轉設計圖 / 推分期 / 僅快速估價
+G. 員工回客 LINE 版本
+H. 內部提醒
+I. 下一步
 `;
  document.getElementById("reportOutput").textContent=latestReport;
  return latestReport;
 }
 
 async function copyReport(){const text=latestReport||buildReport();await navigator.clipboard.writeText(text);alert("已複製案件報告")}
-function downloadReport(){const text=latestReport||buildReport();const blob=new Blob([text],{type:"text/plain;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`one-room-v4-2-report-${Date.now()}.txt`;a.click();URL.revokeObjectURL(url)}
+function downloadReport(){const text=latestReport||buildReport();const blob=new Blob([text],{type:"text/plain;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`one-room-v5-report-${Date.now()}.txt`;a.click();URL.revokeObjectURL(url)}
 
 async function sendToBrain(){
  const d=getFormDataObject();
@@ -106,7 +108,7 @@ async function sendToBrain(){
    });
    const json=await res.json();
    if(!res.ok || json.error){
-     output.textContent="GPT 分析失敗：\\n" + (json.error || JSON.stringify(json,null,2));
+     output.textContent="GPT 分析失敗：\n" + (json.error || JSON.stringify(json,null,2));
      return;
    }
    output.textContent=json.reply||JSON.stringify(json,null,2);

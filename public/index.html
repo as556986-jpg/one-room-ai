@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One Room 文慶大腦 V4.2｜強制 GPT 看圖版</title>
+<title>One Room 文慶大腦 V5｜決策樹強化版</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main class="app">
 <section class="hero">
   <div>
-    <p class="eyebrow">One Room VIP V4.2｜強制 GPT Vision 分析</p>
-    <h1>文慶大腦 VIP 案件評估系統</h1>
-    <p class="subtitle">沒照片不分析；沒 API Key 不分析；只有 GPT 看圖成功才產生回覆。</p>
+    <p class="eyebrow">One Room VIP V5｜決策樹強化版</p>
+    <h1>文慶大腦案件評估系統</h1>
+    <p class="subtitle">沒照片不分析；沒 API Key 不分析；先判斷接案策略，再輸出報價區間與 LINE 話術。</p>
   </div>
   <div class="status-card">
-    <span>正確流程</span>
-    <strong>表單 + 照片 → OpenAI Vision → 文慶邏輯 → 員工建議</strong>
+    <span>核心流程</span>
+    <strong>表單 + 照片 → GPT Vision → 預算閘門 → 文慶話術</strong>
   </div>
 </section>
 
@@ -38,33 +38,35 @@
 <section class="panel">
 <h2>② 預算與空間</h2>
 <div class="grid two">
+<label>客戶確切預算（可填數字）<input name="budgetExact" type="number" placeholder="例：30000 / 10000 / 150000"></label>
 <label>預算區間
 <select name="budgetBand">
-<option>8萬內</option><option>8–10萬</option><option>10–12萬</option><option>12–16萬</option><option>16–24萬</option><option>24–35萬</option><option>35萬以上</option><option>不確定</option>
+<option>未滿3萬</option><option>3–5萬</option><option>5–8萬</option><option>8–10萬</option><option>10–12萬</option><option>12–16萬</option><option>16–24萬</option><option>24–35萬</option><option>35萬以上</option><option>不確定</option>
 </select>
 </label>
 <label>急迫程度<select name="urgency"><option>低</option><option>中</option><option>高</option><option>很急</option></select></label>
-<label>空間類型<select name="spaceType"><option>臥室</option><option>套房</option><option>客廳</option><option>書房</option><option>電競房</option><option>三房兩廳</option><option>其他</option></select></label>
+<label>空間類型<select name="spaceType"><option>臥室</option><option>套房</option><option>客廳</option><option>書房</option><option>電競房</option><option>三房兩廳</option><option>租屋臥室</option><option>其他</option></select></label>
 <label>坪數區間<select name="sizeBand"><option>3坪以下</option><option>3–5坪</option><option>5–8坪</option><option>8–12坪</option><option>12坪以上</option></select></label>
-<label>屋況<select name="houseCondition"><option>新成屋</option><option>一般中古屋</option><option>老屋</option><option>租屋</option><option>空屋</option><option>很亂</option></select></label>
-<label>停車 / 搬運距離<select name="walkingDistance"><option>0–10m</option><option>10–30m</option><option>30m以上</option><option>不確定</option></select></label>
+<label>屋況<select name="houseCondition"><option>新成屋</option><option>一般中古屋</option><option>老屋</option><option>租屋</option><option>空屋</option><option>很亂</option><option>不明</option></select></label>
 </div>
-<label>大樓限制 / 現場限制<textarea name="buildingRules" placeholder="例：需電梯保護、施工時段限制、樓梯窄、無停車"></textarea></label>
+<label>大樓限制 / 現場限制<textarea name="buildingRules" placeholder="例：無電梯、施工時段限制、樓梯窄、無停車、需保護"></textarea></label>
 </section>
 
 <section class="panel">
-<h2>③ 需求模組</h2>
+<h2>③ 需求與風格</h2>
 <label>客戶原話 / 需求重點<textarea name="clientWords" placeholder="例：簡單高級、不要太多東西、帶人回家方便、不要油條、有品味"></textarea></label>
-<label>風格偏好<input name="stylePreference" placeholder="例：奶油風 / 飯店風 / 男生質感房 / 情侶房"></label>
+<label>風格偏好<input name="stylePreference" placeholder="例：奶油風 / 飯店風 / 男生質感房 / 情侶房 / 精品感 / 豪宅感"></label>
 <div class="checks">
 <label><input type="checkbox" name="modules" value="油漆">油漆</label>
 <label><input type="checkbox" name="modules" value="地板">地板</label>
 <label><input type="checkbox" name="modules" value="燈具">燈具</label>
+<label><input type="checkbox" name="modules" value="燈光重配">燈光重配</label>
 <label><input type="checkbox" name="modules" value="窗簾">窗簾</label>
 <label><input type="checkbox" name="modules" value="床組">床組</label>
 <label><input type="checkbox" name="modules" value="電腦桌">電腦桌</label>
 <label><input type="checkbox" name="modules" value="化妝桌">化妝桌</label>
 <label><input type="checkbox" name="modules" value="衣櫃">衣櫃</label>
+<label><input type="checkbox" name="modules" value="玻璃衣櫃">玻璃衣櫃</label>
 <label><input type="checkbox" name="modules" value="冷氣">冷氣</label>
 <label><input type="checkbox" name="modules" value="清運">清運</label>
 <label><input type="checkbox" name="modules" value="小拆除">小拆除</label>
@@ -87,8 +89,9 @@
 <label><input type="checkbox" name="customerRisk" value="龜毛">龜毛</label>
 <label><input type="checkbox" name="customerRisk" value="一直比價">一直比價</label>
 <label><input type="checkbox" name="customerRisk" value="很急">很急</label>
-<label><input type="checkbox" name="customerRisk" value="想豪宅感但預算低">想豪宅感但預算低</label>
+<label><input type="checkbox" name="customerRisk" value="想豪宅感但預算低">豪宅感預算低</label>
 <label><input type="checkbox" name="customerRisk" value="猶豫">猶豫</label>
+<label><input type="checkbox" name="customerRisk" value="照片不足">照片不足</label>
 </div>
 <label>內部備註<textarea name="internalNote" placeholder="例：無電梯衣櫃要先提醒，客人可能會比價"></textarea></label>
 </section>
