@@ -1,0 +1,1 @@
+V4.2 強制 GPT Vision：沒照片不分析，沒 API Key 不分析，不允許 fallback 模板。必須根據照片實際內容動態回覆。

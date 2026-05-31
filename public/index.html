@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Room 文慶大腦 V4.2｜強制 GPT 看圖版</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+<section class="hero">
+  <div>
+    <p class="eyebrow">One Room VIP V4.2｜強制 GPT Vision 分析</p>
+    <h1>文慶大腦 VIP 案件評估系統</h1>
+    <p class="subtitle">沒照片不分析；沒 API Key 不分析；只有 GPT 看圖成功才產生回覆。</p>
+  </div>
+  <div class="status-card">
+    <span>正確流程</span>
+    <strong>表單 + 照片 → OpenAI Vision → 文慶邏輯 → 員工建議</strong>
+  </div>
+</section>
+
+<form id="caseForm" class="form-grid">
+<section class="panel">
+<h2>① 基本資料</h2>
+<div class="grid two">
+<label>案件編號<input name="caseId" placeholder="例：OR-20260601-001"></label>
+<label>員工姓名<input name="staffName" placeholder="例：A員工"></label>
+<label>客戶暱稱<input name="customerAlias" placeholder="例：陳先生"></label>
+<label>來源管道<select name="leadSource"><option>LINE</option><option>IG</option><option>FB</option><option>電話</option><option>介紹</option><option>其他</option></select></label>
+<label>地區<input name="region" placeholder="例：桃園龍潭 / 台北 / 高雄"></label>
+<label>行政區<input name="district" placeholder="例：龍潭區"></label>
+<label>樓層<input name="floorNumber" type="number" min="1" placeholder="例：2"></label>
+<label>有無電梯<select name="elevator"><option>有</option><option>無</option><option>不確定</option></select></label>
+</div>
+</section>
+
+<section class="panel">
+<h2>② 預算與空間</h2>
+<div class="grid two">
+<label>預算區間
+<select name="budgetBand">
+<option>8萬內</option><option>8–10萬</option><option>10–12萬</option><option>12–16萬</option><option>16–24萬</option><option>24–35萬</option><option>35萬以上</option><option>不確定</option>
+</select>
+</label>
+<label>急迫程度<select name="urgency"><option>低</option><option>中</option><option>高</option><option>很急</option></select></label>
+<label>空間類型<select name="spaceType"><option>臥室</option><option>套房</option><option>客廳</option><option>書房</option><option>電競房</option><option>三房兩廳</option><option>其他</option></select></label>
+<label>坪數區間<select name="sizeBand"><option>3坪以下</option><option>3–5坪</option><option>5–8坪</option><option>8–12坪</option><option>12坪以上</option></select></label>
+<label>屋況<select name="houseCondition"><option>新成屋</option><option>一般中古屋</option><option>老屋</option><option>租屋</option><option>空屋</option><option>很亂</option></select></label>
+<label>停車 / 搬運距離<select name="walkingDistance"><option>0–10m</option><option>10–30m</option><option>30m以上</option><option>不確定</option></select></label>
+</div>
+<label>大樓限制 / 現場限制<textarea name="buildingRules" placeholder="例：需電梯保護、施工時段限制、樓梯窄、無停車"></textarea></label>
+</section>
+
+<section class="panel">
+<h2>③ 需求模組</h2>
+<label>客戶原話 / 需求重點<textarea name="clientWords" placeholder="例：簡單高級、不要太多東西、帶人回家方便、不要油條、有品味"></textarea></label>
+<label>風格偏好<input name="stylePreference" placeholder="例：奶油風 / 飯店風 / 男生質感房 / 情侶房"></label>
+<div class="checks">
+<label><input type="checkbox" name="modules" value="油漆">油漆</label>
+<label><input type="checkbox" name="modules" value="地板">地板</label>
+<label><input type="checkbox" name="modules" value="燈具">燈具</label>
+<label><input type="checkbox" name="modules" value="窗簾">窗簾</label>
+<label><input type="checkbox" name="modules" value="床組">床組</label>
+<label><input type="checkbox" name="modules" value="電腦桌">電腦桌</label>
+<label><input type="checkbox" name="modules" value="化妝桌">化妝桌</label>
+<label><input type="checkbox" name="modules" value="衣櫃">衣櫃</label>
+<label><input type="checkbox" name="modules" value="冷氣">冷氣</label>
+<label><input type="checkbox" name="modules" value="清運">清運</label>
+<label><input type="checkbox" name="modules" value="小拆除">小拆除</label>
+<label><input type="checkbox" name="modules" value="搬運組裝">搬運組裝</label>
+</div>
+<label>優先順序補充<textarea name="priorityNote" placeholder="例：想先做最有感的、預算有限、希望先拍照好看"></textarea></label>
+</section>
+
+<section class="panel">
+<h2>④ 員工初判</h2>
+<div class="grid two">
+<label>牆面狀況<select name="wallCondition"><option>正常</option><option>髒污</option><option>裂痕</option><option>疑似壁癌</option><option>不明</option></select></label>
+<label>地板判斷<select name="floorCondition"><option>可留</option><option>建議換</option><option>必換</option><option>不明</option></select></label>
+<label>燈光判斷<select name="lightCondition"><option>可留</option><option>建議改</option><option>必改</option><option>不明</option></select></label>
+<label>家具可保留<select name="keepFurniture"><option>多數可留</option><option>部分可留</option><option>幾乎不可留</option><option>不明</option></select></label>
+<label>清運量<select name="clearanceLevel"><option>少</option><option>中</option><option>多</option><option>非常多</option></select></label>
+<label>搬運風險<select name="movingRisk"><option>低</option><option>中</option><option>高</option></select></label>
+</div>
+<div class="checks">
+<label><input type="checkbox" name="customerRisk" value="龜毛">龜毛</label>
+<label><input type="checkbox" name="customerRisk" value="一直比價">一直比價</label>
+<label><input type="checkbox" name="customerRisk" value="很急">很急</label>
+<label><input type="checkbox" name="customerRisk" value="想豪宅感但預算低">想豪宅感但預算低</label>
+<label><input type="checkbox" name="customerRisk" value="猶豫">猶豫</label>
+</div>
+<label>內部備註<textarea name="internalNote" placeholder="例：無電梯衣櫃要先提醒，客人可能會比價"></textarea></label>
+</section>
+
+<section class="panel">
+<h2>⑤ 現場照片上傳｜必填</h2>
+<p class="hint">沒有照片不會送出分析。建議至少 3 張：房間全景、地板/牆面、天花/燈具。</p>
+<label>案件照片<input id="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple></label>
+<div id="photoStatus" class="photo-status">尚未上傳照片。</div>
+<div id="photoPreview" class="photo-preview"></div>
+</section>
+
+<section class="actions">
+<button type="button" onclick="buildReport()">產生內部報告</button>
+<button type="button" onclick="copyReport()">複製報告</button>
+<button type="button" onclick="downloadReport()">下載 TXT</button>
+<button type="button" class="primary" onclick="sendToBrain()">送出 GPT Vision 分析</button>
+</section>
+</form>
+
+<section class="panel output-panel"><h2>⑥ 內部案件報告</h2><pre id="reportOutput">尚未產生報告。</pre></section>
+<section class="panel output-panel"><h2>⑦ 文慶大腦回覆</h2><pre id="aiOutput">尚未送出分析。</pre></section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
